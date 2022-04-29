@@ -1,4 +1,4 @@
-# GHC-2022-data-engineering-workshop
+# GHC 2022: Demystifying Data Engineering
 
 ## Goals
 The goal of this workshop is to demystify data engineering and provide a simple
