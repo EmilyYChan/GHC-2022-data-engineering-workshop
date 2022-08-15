@@ -17,3 +17,23 @@ any news that matches your interests.
 
 Alternative idea if the above is too slow locally: a simple pipeline that runs
 every 2 minute to grab weather data, at the end we plot weather over time.
+
+## Setup
+
+install requirements using pip install -r 
+
+### Running
+
+Access the UI at localhost: 
+Turn the Dag on
+
+## Background 
+
+What is a DAG
+
+Principles
+
+
+
+
+
