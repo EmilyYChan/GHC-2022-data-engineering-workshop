@@ -1,0 +1,186 @@
+[2022-08-29T20:37:46.138-0400] {processor.py:153} INFO - Started process (PID=16532) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:37:46.154-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:37:46.154-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:37:46.154-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:37:46.318-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:37:49.253-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:37:49.253-0400] {manager.py:508} INFO - Created Permission View: can delete on DAG:test_etl
+[2022-08-29T20:37:49.277-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:37:49.277-0400] {manager.py:508} INFO - Created Permission View: can read on DAG:test_etl
+[2022-08-29T20:37:49.287-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:37:49.287-0400] {manager.py:508} INFO - Created Permission View: can edit on DAG:test_etl
+[2022-08-29T20:37:49.288-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:37:49.287-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:37:49.388-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:37:49.387-0400] {dag.py:2448} INFO - Creating ORM DAG for test_etl
+[2022-08-29T20:37:49.445-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:37:49.445-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:37:49.497-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 3.360 seconds
+[2022-08-29T20:38:45.998-0400] {processor.py:153} INFO - Started process (PID=16591) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:38:46.008-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:38:46.009-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:38:46.008-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:38:46.053-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:38:46.874-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:38:46.874-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:38:46.893-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:38:46.893-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:38:46.911-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 0.914 seconds
+[2022-08-29T20:39:46.860-0400] {processor.py:153} INFO - Started process (PID=16638) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:39:46.868-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:39:46.869-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:39:46.869-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:39:46.908-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:39:47.624-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:39:47.624-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:39:47.643-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:39:47.643-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:39:47.658-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 0.799 seconds
+[2022-08-29T20:40:37.931-0400] {processor.py:153} INFO - Started process (PID=16682) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:40:37.942-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:40:37.942-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:40:37.942-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:40:37.991-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:40:38.878-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:40:38.877-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:40:38.900-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:40:38.900-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:40:38.918-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 0.989 seconds
+[2022-08-29T20:41:32.578-0400] {processor.py:153} INFO - Started process (PID=16730) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:41:32.594-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:41:32.594-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:41:32.594-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:41:32.664-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:41:33.694-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:41:33.694-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:41:33.714-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:41:33.714-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:41:33.732-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 1.154 seconds
+[2022-08-29T20:42:26.062-0400] {processor.py:153} INFO - Started process (PID=16778) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:42:26.070-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:42:26.071-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:42:26.071-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:42:26.109-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:42:26.907-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:42:26.906-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:42:26.926-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:42:26.926-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:42:26.941-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 0.880 seconds
+[2022-08-29T20:43:23.752-0400] {processor.py:153} INFO - Started process (PID=16829) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:43:23.763-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:43:23.764-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:43:23.763-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:43:23.810-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:43:25.044-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:43:25.043-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:43:25.063-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:43:25.062-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:43:25.082-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 1.331 seconds
+[2022-08-29T20:44:23.521-0400] {processor.py:153} INFO - Started process (PID=16883) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:44:23.533-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:44:23.534-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:44:23.534-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:44:23.612-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:44:24.909-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:44:24.908-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:44:24.937-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:44:24.936-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:44:24.955-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 1.437 seconds
+[2022-08-29T20:45:21.816-0400] {processor.py:153} INFO - Started process (PID=16938) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:45:21.824-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:45:21.825-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:45:21.825-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:45:21.866-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:45:22.605-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:45:22.605-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:45:22.625-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:45:22.625-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:45:22.642-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 0.827 seconds
+[2022-08-29T20:46:12.069-0400] {processor.py:153} INFO - Started process (PID=16982) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:46:12.077-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:46:12.078-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:46:12.078-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:46:12.117-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:46:12.838-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:46:12.838-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:46:12.858-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:46:12.858-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:46:12.873-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 0.805 seconds
+[2022-08-29T20:47:01.694-0400] {processor.py:153} INFO - Started process (PID=17027) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:47:01.705-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:47:01.706-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:47:01.706-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:47:01.751-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:47:03.252-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:47:03.252-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:47:03.275-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:47:03.275-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:47:03.295-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 1.602 seconds
+[2022-08-29T20:47:59.032-0400] {processor.py:153} INFO - Started process (PID=17083) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:47:59.041-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:47:59.042-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:47:59.041-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:47:59.085-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:48:00.261-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:48:00.260-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:48:00.280-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:48:00.280-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:48:00.297-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 1.266 seconds
+[2022-08-29T20:48:58.845-0400] {processor.py:153} INFO - Started process (PID=17131) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:48:58.855-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:48:58.857-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:48:58.856-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:48:58.899-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:48:59.666-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:48:59.665-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:48:59.687-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:48:59.687-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:48:59.704-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 0.859 seconds
+[2022-08-29T20:49:49.045-0400] {processor.py:153} INFO - Started process (PID=17175) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:49:49.053-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:49:49.054-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:49:49.054-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:49:49.092-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:49:49.816-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:49:49.815-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:49:49.834-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:49:49.834-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:49:49.852-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 0.807 seconds
+[2022-08-29T20:50:36.734-0400] {processor.py:153} INFO - Started process (PID=17220) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:50:36.742-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:50:36.743-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:50:36.743-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:50:36.781-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:50:37.492-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:50:37.492-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:50:37.510-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:50:37.510-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:50:37.526-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 0.793 seconds
+[2022-08-29T20:51:24.625-0400] {processor.py:153} INFO - Started process (PID=17264) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:51:24.634-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:51:24.635-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:51:24.635-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:51:24.677-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:51:25.399-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:51:25.398-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:51:25.418-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:51:25.418-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:51:25.434-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 0.810 seconds
+[2022-08-29T20:52:13.198-0400] {processor.py:153} INFO - Started process (PID=17309) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:52:13.208-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:52:13.209-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:52:13.209-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:52:13.248-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:52:13.962-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:52:13.962-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:52:13.981-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:52:13.980-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:52:13.995-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 0.798 seconds
+[2022-08-29T20:53:03.313-0400] {processor.py:153} INFO - Started process (PID=17356) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:53:03.321-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:53:03.322-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:53:03.322-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:53:03.360-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:53:04.070-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:53:04.069-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:53:04.088-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:53:04.088-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:53:04.104-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 0.792 seconds
+[2022-08-29T20:54:03.568-0400] {processor.py:153} INFO - Started process (PID=17403) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:54:03.579-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:54:03.579-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:54:03.579-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:54:03.620-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:54:05.231-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:54:05.231-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:54:05.259-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:54:05.259-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:54:05.278-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 1.711 seconds
+[2022-08-29T20:55:08.909-0400] {processor.py:153} INFO - Started process (PID=17454) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:55:08.918-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:55:08.919-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:55:08.919-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:55:08.960-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:55:09.716-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:55:09.716-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:55:09.737-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:55:09.737-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:55:09.754-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 0.847 seconds
+[2022-08-29T20:56:03.077-0400] {processor.py:153} INFO - Started process (PID=17500) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:56:03.085-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:56:03.085-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:56:03.085-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:56:03.124-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:56:03.836-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:56:03.836-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:56:03.855-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:56:03.854-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:56:03.870-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 0.794 seconds
+[2022-08-29T20:56:53.246-0400] {processor.py:153} INFO - Started process (PID=17544) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:56:53.254-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:56:53.255-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:56:53.255-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:56:53.294-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:56:54.032-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:56:54.032-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:56:54.051-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:56:54.050-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:56:54.067-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 0.822 seconds
+[2022-08-29T20:57:54.415-0400] {processor.py:153} INFO - Started process (PID=17600) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:57:54.424-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:57:54.425-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:57:54.425-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:57:54.470-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:57:55.908-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:57:55.906-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:57:55.929-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:57:55.928-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:57:55.949-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 1.535 seconds
+[2022-08-29T20:59:08.188-0400] {processor.py:153} INFO - Started process (PID=17664) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:59:08.198-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T20:59:08.199-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:59:08.199-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:59:08.249-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T20:59:09.599-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:59:09.599-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T20:59:09.624-0400] {logging_mixin.py:115} INFO - [2022-08-29T20:59:09.624-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T20:59:09.644-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 1.458 seconds
+[2022-08-29T21:00:14.984-0400] {processor.py:153} INFO - Started process (PID=17746) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T21:00:14.996-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T21:00:14.996-0400] {logging_mixin.py:115} INFO - [2022-08-29T21:00:14.996-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T21:00:15.051-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T21:00:16.274-0400] {logging_mixin.py:115} INFO - [2022-08-29T21:00:16.273-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T21:00:16.294-0400] {logging_mixin.py:115} INFO - [2022-08-29T21:00:16.293-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T21:00:16.311-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 1.328 seconds
+[2022-08-29T21:01:13.545-0400] {processor.py:153} INFO - Started process (PID=17803) to work on /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T21:01:13.555-0400] {processor.py:640} INFO - Processing file /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py for tasks to queue
+[2022-08-29T21:01:13.556-0400] {logging_mixin.py:115} INFO - [2022-08-29T21:01:13.556-0400] {dagbag.py:508} INFO - Filling up the DagBag from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T21:01:13.597-0400] {processor.py:650} INFO - DAG(s) dict_keys(['test_etl']) retrieved from /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py
+[2022-08-29T21:01:14.346-0400] {logging_mixin.py:115} INFO - [2022-08-29T21:01:14.346-0400] {dag.py:2429} INFO - Sync 1 DAGs
+[2022-08-29T21:01:14.364-0400] {logging_mixin.py:115} INFO - [2022-08-29T21:01:14.364-0400] {dag.py:2977} INFO - Setting next_dagrun for test_etl to None, run_after=None
+[2022-08-29T21:01:14.380-0400] {processor.py:161} INFO - Processing /Users/jl/Documents/Repos/GHC-2022-data-engineering-workshop/airflow/dags/test_dag.py took 0.835 seconds
