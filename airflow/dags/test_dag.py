@@ -1,49 +1,78 @@
-# [START tutorial]
-# [START import_module]
 import json
-
 import pendulum
-
 from airflow.decorators import dag, task
 
-# [END import_module]
 
-
-# [START instantiate_dag]
 @dag(
     schedule_interval=None,
-    start_date=pendulum.datetime(2021, 1, 1, tz="UTC"),
+    start_date=pendulum.datetime(2022, 1, 1, tz="UTC"),
     catchup=False,
-    tags=['example'],
 )
 def test_etl():
     """
     ### GHC 2022 Data Engineering Workshop Demo Pipeline
-    This is a simple ETL data pipeline example which demonstrates the use of
-    the TaskFlow API using three simple tasks for Extract, Transform, and Load.
-    Documentation that goes along with the Airflow TaskFlow API tutorial is
-    located
-    [here](https://airflow.apache.org/docs/apache-airflow/stable/tutorial_taskflow_api.html)
+    This is a simple ETL data pipeline which demonstrates ingesting data from 
+    different sources, monitoring data quality, and generating a report. 
     """
-    # [END instantiate_dag]
 
-    # [START extract]
     @task()
-    def extract():
+    def scrape_yahoo_finance(company_ticker):  # return type
         """
         #### Extract task
         A simple Extract task to get data ready for the rest of the data
-        pipeline. In this case, getting data is simulated by reading from a
-        hardcoded JSON string.
+        pipeline. 
         """
-        data_string = '{"1001": 301.27, "1002": 433.21, "1003": 502.22}'
+        # import requests
 
-        order_data_dict = json.loads(data_string)
-        return order_data_dict
+        # yahoo_finance_page = requests.get(f'https://finance.yahoo.com/quote/{company_ticker}')
+        # # with open('yahoo_finance.html', 'w') as file:
+        # #     file.write(yahoo_finance_page.text)
 
-    # [END extract]
+        import os 
+        print("Current working directory:", os.getcwd())
+        yahoo_finance_page = open('yahoo_finance.html', 'r').read()
+        return yahoo_finance_page
 
-    # [START transform]
+
+    @task()
+    def curate_yahoo_finance_html(yahoo_finance_page):
+        from bs4 import BeautifulSoup
+
+        soup = BeautifulSoup(yahoo_finance_page, 'html.parser')
+
+        market_price = soup.find(name="fin-streamer", attrs={"data-symbol": company_ticker, "data-field":"regularMarketPrice"})
+        after_hours_trading_price = soup.find(name="fin-streamer", attrs={"data-symbol": company_ticker, "data-field":"postMarketPrice"})
+        print("\nMarket price: ", market_price.text, "\nAfter hours trading price: ", after_hours_trading_price.text)
+        
+
+    @task()
+    def hit_wikipedia_api():
+        """
+        #### Extract task
+        A simple Extract task to get data ready for the rest of the data
+        pipeline. 
+        """
+        import wikipediaapi
+
+        company_name = 'T. Rowe Price'
+
+        wiki = wikipediaapi.Wikipedia('en')
+        page = wiki.page(company_name) # error handling
+        print("\nSummary: \n", page.summary, "\n")
+        print("Further reading: \n", page.fullurl)
+
+
+
+    @task()
+    def hit_news_api():
+        """
+        #### Extract task
+        A simple Extract task to get data ready for the rest of the data
+        pipeline. 
+        """
+        pass
+
+
     @task(multiple_outputs=True)
     def transform(order_data_dict: dict):
         """
@@ -71,17 +100,20 @@ def test_etl():
 
         print(f"Total order value is: {total_order_value:.2f}")
 
-    # [END load]
+
 
     # [START main_flow]
-    order_data = extract()
-    order_summary = transform(order_data)
-    load(order_summary["total_order_value"])
+    company_ticker = "TROW"
+    yahoo_finance_page = scrape_yahoo_finance(company_ticker)
+    curate_yahoo_finance_html(yahoo_finance_page)
+    hit_wikipedia_api()
+    #order_summary = transform(order_data)
+    #load(order_summary["total_order_value"])
     # [END main_flow]
 
 
 # [START dag_invocation]
-test_dag = test_etl()
+demo_dag = test_etl()
 # [END dag_invocation]
 
-# [END tutorial]
+

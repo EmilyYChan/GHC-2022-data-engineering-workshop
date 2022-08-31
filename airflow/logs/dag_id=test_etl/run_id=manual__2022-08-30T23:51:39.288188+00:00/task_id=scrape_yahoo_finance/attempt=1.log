@@ -1,0 +1,23 @@
+[2022-08-30T19:51:42.898-0400] {taskinstance.py:1171} INFO - Dependencies all met for <TaskInstance: test_etl.scrape_yahoo_finance manual__2022-08-30T23:51:39.288188+00:00 [queued]>
+[2022-08-30T19:51:42.916-0400] {taskinstance.py:1171} INFO - Dependencies all met for <TaskInstance: test_etl.scrape_yahoo_finance manual__2022-08-30T23:51:39.288188+00:00 [queued]>
+[2022-08-30T19:51:42.917-0400] {taskinstance.py:1368} INFO - 
+--------------------------------------------------------------------------------
+[2022-08-30T19:51:42.917-0400] {taskinstance.py:1369} INFO - Starting attempt 1 of 1
+[2022-08-30T19:51:42.917-0400] {taskinstance.py:1370} INFO - 
+--------------------------------------------------------------------------------
+[2022-08-30T19:51:42.938-0400] {taskinstance.py:1389} INFO - Executing <Task(_PythonDecoratedOperator): scrape_yahoo_finance> on 2022-08-30 23:51:39.288188+00:00
+[2022-08-30T19:51:42.940-0400] {standard_task_runner.py:52} INFO - Started process 7995 to run task
+[2022-08-30T19:51:42.949-0400] {standard_task_runner.py:79} INFO - Running: ['airflow', 'tasks', 'run', 'test_etl', 'scrape_yahoo_finance', 'manual__2022-08-30T23:51:39.288188+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/test_dag.py', '--cfg-path', '/var/folders/2z/f_7z97sn6_33j1hnl38wlzs40000gn/T/tmpxno74nl1', '--error-file', '/var/folders/2z/f_7z97sn6_33j1hnl38wlzs40000gn/T/tmp7vv9lk7i']
+[2022-08-30T19:51:42.953-0400] {standard_task_runner.py:80} INFO - Job 7: Subtask scrape_yahoo_finance
+[2022-08-30T19:51:43.033-0400] {task_command.py:371} INFO - Running <TaskInstance: test_etl.scrape_yahoo_finance manual__2022-08-30T23:51:39.288188+00:00 [running]> on host FAS-EALC-LIU-2
+[2022-08-30T19:51:43.171-0400] {taskinstance.py:1581} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=airflow
+AIRFLOW_CTX_DAG_ID=test_etl
+AIRFLOW_CTX_TASK_ID=scrape_yahoo_finance
+AIRFLOW_CTX_EXECUTION_DATE=2022-08-30T23:51:39.288188+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2022-08-30T23:51:39.288188+00:00
+[2022-08-30T19:51:43.172-0400] {python.py:173} INFO - Done. Returned value was: 2
+[2022-08-30T19:51:43.192-0400] {taskinstance.py:1407} INFO - Marking task as SUCCESS. dag_id=test_etl, task_id=scrape_yahoo_finance, execution_date=20220830T235139, start_date=20220830T235142, end_date=20220830T235143
+[2022-08-30T19:51:43.246-0400] {local_task_job.py:156} INFO - Task exited with return code 0
+[2022-08-30T19:51:43.278-0400] {local_task_job.py:279} INFO - 1 downstream tasks scheduled from follow-on schedule check
