@@ -71,6 +71,27 @@ def test_etl():
 
         return market_price.text, after_hours_trading_price.text
 
+        # alternative curation
+        # parse out different info -> ratio of volume to different volume
+        # exceptionally high volume compared to a moving average of volume can reveal euphoria or fear while much lower than average volume can reflect apathy or disinterest
+        volume = parser.find(
+            name="fin-streamer",
+            attrs={"data-symbol": company_ticker, "data-field": "regularMarketVolume"},
+        )
+        avg_volume = parser.find(
+            name="td", attrs={"data-test": "AVERAGE_VOLUME_3MONTH-value"}
+        )
+        print(
+            "Daily Volume: ", volume.text, "\n3 Month Average Volume: ", avg_volume.text
+        )
+
+        # esg score
+        ESG_score_component = parser.find(
+            name="div", attrs={"data-yaft-module": "tdv2-applet-miniESGScore"}
+        )
+        tags = ESG_score_component.find_all(string=re.compile(r".*"))
+        print(tags)
+
     @task(retries=3, retry_exponential_backoff=True)
     def hit_wikipedia_api(company_name):
         """
