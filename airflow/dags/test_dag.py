@@ -15,52 +15,77 @@ def test_etl():
     different sources, monitoring data quality, and generating a report. 
     """
 
-    @task()
+    @task(retries=3, retry_exponential_backoff=True)
     def scrape_yahoo_finance(company_ticker):  # return type
         """
-        #### Extract task
-        A simple Extract task to get data ready for the rest of the data
-        pipeline. 
+        #### Scrape Yahoo Finance
+        Scrape Yahoo Finance for a given company and save the html to the local directory
         """
         # import requests
 
-        # yahoo_finance_page = requests.get(f'https://finance.yahoo.com/quote/{company_ticker}')
-        # # with open('yahoo_finance.html', 'w') as file:
-        # #     file.write(yahoo_finance_page.text)
+        # url = f'https://finance.yahoo.com/quote/{company_ticker}'
+        # try:
+        #     yahoo_finance_page = requests.get(url)
+        # except Exception as e:
+        #     print(f"Request to {url} failed with exception \"{e}\"")
+        #     raise e
+        # print("Response recieved from Yahoo Finance")
 
+        # with open('yahoo_finance.html', 'w') as file:
+        #     file.write(yahoo_finance_page.text)
+
+        # SIGSEGV workaround
         import os 
         print("Current working directory:", os.getcwd())
         yahoo_finance_page = open('yahoo_finance.html', 'r').read()
+
         return yahoo_finance_page
 
 
     @task()
     def curate_yahoo_finance_html(yahoo_finance_page):
+        """
+        #### Curate Yahoo Finance HTML
+        Pull out the market price and after hours price
+        """
         from bs4 import BeautifulSoup
 
-        soup = BeautifulSoup(yahoo_finance_page, 'html.parser')
+        parser = BeautifulSoup(yahoo_finance_page, 'html.parser')
 
-        market_price = soup.find(name="fin-streamer", attrs={"data-symbol": company_ticker, "data-field":"regularMarketPrice"})
-        after_hours_trading_price = soup.find(name="fin-streamer", attrs={"data-symbol": company_ticker, "data-field":"postMarketPrice"})
+        market_price = parser.find(name="fin-streamer", attrs={"data-symbol": company_ticker, "data-field":"regularMarketPrice"})
+        after_hours_trading_price = parser.find(name="fin-streamer", attrs={"data-symbol": company_ticker, "data-field":"postMarketPrice"})
         print("\nMarket price: ", market_price.text, "\nAfter hours trading price: ", after_hours_trading_price.text)
         
+        # TODO: save to sqlite db
 
-    @task()
-    def hit_wikipedia_api():
+        return market_price.text, after_hours_trading_price.text
+        
+
+    @task(retries=3, retry_exponential_backoff=True)
+    def hit_wikipedia_api(company_name):
         """
-        #### Extract task
-        A simple Extract task to get data ready for the rest of the data
-        pipeline. 
+        #### Hit Wikipedia API
+        Get the Wikipedia page for a given company and save the page to the local directory
         """
-        import wikipediaapi
+        # from wikipediaapi import Wikipedia
 
-        company_name = 'T. Rowe Price'
+        # try:
+        #     wiki_page = Wikipedia('en').page(company_name) 
+        # except Exception as e:
+        #     print(f"Request to Wikipedia API for {company_name} page failed with exception \"{e}\"")
+        #     raise e
+        # print("Summary: \n", wiki_page.summary, "\n")
+        # print("Further reading: \n", wiki_page.fullurl)
 
-        wiki = wikipediaapi.Wikipedia('en')
-        page = wiki.page(company_name) # error handling
-        print("\nSummary: \n", page.summary, "\n")
-        print("Further reading: \n", page.fullurl)
+        # import pickle 
+        # pickle.dump(wiki_page, open('wikipedia.obj', 'wb'))
 
+        # SIGSEGV workaround
+        import pickle 
+        wiki_file = open('wikipedia.obj', 'rb') 
+        wiki_page = pickle.load(wiki_file)
+
+        return wiki_page
 
 
     @task()
@@ -73,47 +98,29 @@ def test_etl():
         pass
 
 
-    @task(multiple_outputs=True)
-    def transform(order_data_dict: dict):
-        """
-        #### Transform task
-        A simple Transform task which takes in the collection of order data and
-        computes the total order value.
-        """
-        total_order_value = 0
-
-        for value in order_data_dict.values():
-            total_order_value += value
-
-        return {"total_order_value": total_order_value}
-
-    # [END transform]
-
-    # [START load]
     @task()
-    def load(total_order_value: float):
+    def generate_report(wiki_page, ticker_prices):
         """
-        #### Load task
-        A simple Load task which takes in the result of the Transform task and
-        instead of saving it to end user review, just prints it out.
+        #### Generate a report
         """
+        print(ticker_prices)
+        print("Summary: \n", wiki_page.summary, "\n")
+        print("Further reading: \n", wiki_page.fullurl)
+        pass
 
-        print(f"Total order value is: {total_order_value:.2f}")
 
-
-
-    # [START main_flow]
     company_ticker = "TROW"
+    company_name = 'T. Rowe Price'
+
     yahoo_finance_page = scrape_yahoo_finance(company_ticker)
-    curate_yahoo_finance_html(yahoo_finance_page)
-    hit_wikipedia_api()
-    #order_summary = transform(order_data)
-    #load(order_summary["total_order_value"])
-    # [END main_flow]
+    ticker_prices = curate_yahoo_finance_html(yahoo_finance_page)
+    wiki_page = hit_wikipedia_api(company_name)
+    generate_report(wiki_page, ticker_prices)
 
 
-# [START dag_invocation]
+
+# invoke DAG
 demo_dag = test_etl()
-# [END dag_invocation]
+
 
 
