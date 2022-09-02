@@ -1,37 +1,34 @@
 # GHC 2022: Demystifying Data Engineering
 
 ## Goals
-The goal of this workshop is to demystify data engineering and provide a simple
-demonstration of some of the tools and tech stack. These include:
-- Airflow: pipeline orchestration
+The goal of this workshop is to demystify data engineering and demonstrate some of the important concepts and principles of data engineering via a toy data pipeline. 
 
-Most data engineering workflows also make use of cloud computing services and
+Most data engineering workflows make use of cloud computing services and
 cloud data warehouses such as AWS, GCP, Azure, and Snowflake, but this demo
 won't touch on those, since it's set up to run locally.
 
-This repo contains a simple pipeline that scrapes data from the front pages of
-Twitter, Reddit, Hackernews, etc., stores them in a local Postgres (SQLite?)
-database, searches the articles for keywords you're interested in (crypto, rust,
-Elon Musk, etc.), and then generates a daily newsletter that prominently features
-any news that matches your interests.
-
-Alternative idea if the above is too slow locally: a simple pipeline that runs
-every 2 minute to grab weather data, at the end we plot weather over time.
+This repo contains a pipeline that scrapes the ticker price of a company from Yahoo Finance, along with information about the company from Wikipedia, and generate a simple report. 
 
 ## Setup
 
-install requirements using pip install -r 
+1. clone the repo
+2. change paths in airflow/airflow.cfg to where ever you've chosen to clone the repo
+3. activate the venv
+4. run airflow standalone
+record the password shown in the terminal
 
 ### Running
 
-Access the UI at localhost: 
+Access the UI at localhost: 8080
 Turn the Dag on
 
 ## Background 
 
-What is a DAG
 
-Principles
+
+## Principles
+
+
 
 
 
