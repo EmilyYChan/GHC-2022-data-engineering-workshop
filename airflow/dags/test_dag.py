@@ -91,6 +91,7 @@ def test_etl():
         )
         tags = ESG_score_component.find_all(string=re.compile(r".*"))
         print(tags)
+        return volume, avg_volume, tags
 
     @task(retries=3, retry_exponential_backoff=True)
     def hit_wikipedia_api(company_name):
@@ -119,33 +120,109 @@ def test_etl():
 
         return wiki_page
 
-    @task()
-    def hit_news_api():
+    @task(retries=3, retry_exponential_backoff=True)
+    def scrape_bing_news(company_name):
         """
-        #### Extract task
-        A simple Extract task to get data ready for the rest of the data
-        pipeline.
+        #### Scrape Bing News
+        Get the Bing News page for a given company and save the page to the local directory
         """
-        pass
+        # import requests
+
+        # url = f"https://www.bing.com/news/search?q={company_name.replace(" ", "+")}"
+        # bing_news_page = requests.get(url)
+        # print("Request to {url} returned status code: ", bing_news_page.status_code)
+
+        # # save response as html
+        # with open('bing_news.html', 'w') as file:
+        #     file.write(bing_news_page.text)
+
+        # SIGSEGV workaround
+        bing_news_page = open("bing_news.html", "r").read()
+
+        return bing_news_page
 
     @task()
-    def generate_report(wiki_page, ticker_prices):
+    def curate_bing_news_html(bing_news_page):
+        """
+        #### Curate Bing News HTML
+        Parse out headlines and source links for each article
+        """
+        from bs4 import BeautifulSoup
+
+        parser = BeautifulSoup(bing_news_page, "html.parser")
+        bing_news_results = parser.find(name="div", attrs={"class": "main-container"})
+
+        # save for use in report
+        with open("bing_articles.html", "w") as file:
+            file.write(bing_news_results.prettify())
+
+        bing_news_article_cards = bing_news_results.find_all(
+            name="div", attrs={"class": "news-card-body card-with-cluster"}
+        )
+
+        # pull out headline, blurb, link
+        def extract_article_info(article_div):
+            headline = article_div.find("div", attrs={"class": "t_t"}).text
+            blurb = article_div.find("div", attrs={"class": "snippet"}).text
+            source_link = article_div.find("a", href=True)["href"]
+
+            return headline, blurb, source_link
+
+        parsed_articles = list(map(extract_article_info, bing_news_article_cards))
+
+        # save to sqlite db
+        import sqlite3
+        conn = sqlite3.connect('company_report.db')
+        cur = conn.cursor()
+        for headline, blurb, link in parsed_articles:
+            cur.execute("INSERT INTO news_articles VALUES (?, ?, ?) ON CONFLICT(headline) DO UPDATE SET source_link= ?;", (headline, blurb, link, link))
+        conn.commit()
+        conn.close()
+
+        return parsed_articles
+
+    @task()
+    def profile_data():
+        # https://medium.com/analytics-vidhya/pandas-profiling-5ecd0b977ecd
+        import sqlite3
+        import pandas as pd
+        from pandas_profiling import ProfileReport
+
+        conn = sqlite3.connect('company_report.db')
+        df = pd.read_sql_query("SELECT * FROM news_articles", conn)
+        profile = ProfileReport(df, title="News Articles Data Profile")
+        profile.to_file("news_articles_data_profile.html")
+
+    @task()
+    def generate_report(wiki_page, ticker_prices, bing_articles):
         """
         #### Generate a report
         """
         print(ticker_prices)
         print("Summary: \n", wiki_page.summary, "\n")
         print("Further reading: \n", wiki_page.fullurl)
-        pass
+        print(bing_articles[0])
+        
 
     company_ticker = "TROW"
     company_name = "T. Rowe Price"
 
     yahoo_finance_page = scrape_yahoo_finance(company_ticker)
     ticker_prices = curate_yahoo_finance_html(yahoo_finance_page)
-    wiki_page = hit_wikipedia_api(company_name)
-    generate_report(wiki_page, ticker_prices)
 
+    bing_news_page = scrape_bing_news(company_name)
+    bing_articles = curate_bing_news_html(bing_news_page)
+
+    wiki_page = hit_wikipedia_api(company_name)
+
+    generate_report(wiki_page, ticker_prices, bing_articles)
+
+    profile_data()
 
 # invoke DAG
 demo_dag = test_etl()
+
+
+# TODO: set up sql lite db
+# pandas profiling
+# great expectations

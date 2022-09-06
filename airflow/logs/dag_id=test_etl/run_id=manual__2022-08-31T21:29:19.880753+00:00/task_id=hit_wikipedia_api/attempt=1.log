@@ -1,0 +1,53 @@
+[2022-08-31T17:29:30.158-0400] {plugins_manager.py:292} DEBUG - Plugins are already loaded. Skipping.
+[2022-08-31T17:29:30.167-0400] {__init__.py:50} DEBUG - Loading core task runner: StandardTaskRunner
+[2022-08-31T17:29:30.178-0400] {taskinstance.py:1107} DEBUG - previous_execution_date was called
+[2022-08-31T17:29:30.200-0400] {base_task_runner.py:70} DEBUG - Planning to run as the  user
+[2022-08-31T17:29:30.207-0400] {taskinstance.py:871} DEBUG - Refreshing TaskInstance <TaskInstance: test_etl.hit_wikipedia_api manual__2022-08-31T21:29:19.880753+00:00 [queued]> from DB
+[2022-08-31T17:29:30.228-0400] {taskinstance.py:1181} DEBUG - <TaskInstance: test_etl.hit_wikipedia_api manual__2022-08-31T21:29:19.880753+00:00 [queued]> dependency 'Task Instance State' PASSED: True, Task state queued was valid.
+[2022-08-31T17:29:30.228-0400] {taskinstance.py:1181} DEBUG - <TaskInstance: test_etl.hit_wikipedia_api manual__2022-08-31T21:29:19.880753+00:00 [queued]> dependency 'Task Instance Not Running' PASSED: True, Task is not in running state.
+[2022-08-31T17:29:30.235-0400] {taskinstance.py:1181} DEBUG - <TaskInstance: test_etl.hit_wikipedia_api manual__2022-08-31T21:29:19.880753+00:00 [queued]> dependency 'Previous Dagrun State' PASSED: True, The task did not have depends_on_past set.
+[2022-08-31T17:29:30.235-0400] {taskinstance.py:1181} DEBUG - <TaskInstance: test_etl.hit_wikipedia_api manual__2022-08-31T21:29:19.880753+00:00 [queued]> dependency 'Trigger Rule' PASSED: True, The task instance did not have any upstream tasks.
+[2022-08-31T17:29:30.236-0400] {taskinstance.py:1181} DEBUG - <TaskInstance: test_etl.hit_wikipedia_api manual__2022-08-31T21:29:19.880753+00:00 [queued]> dependency 'Not In Retry Period' PASSED: True, The task instance was not marked for retrying.
+[2022-08-31T17:29:30.236-0400] {taskinstance.py:1171} INFO - Dependencies all met for <TaskInstance: test_etl.hit_wikipedia_api manual__2022-08-31T21:29:19.880753+00:00 [queued]>
+[2022-08-31T17:29:30.237-0400] {taskinstance.py:1181} DEBUG - <TaskInstance: test_etl.hit_wikipedia_api manual__2022-08-31T21:29:19.880753+00:00 [queued]> dependency 'Task Concurrency' PASSED: True, Task concurrency is not set.
+[2022-08-31T17:29:30.237-0400] {taskinstance.py:1181} DEBUG - <TaskInstance: test_etl.hit_wikipedia_api manual__2022-08-31T21:29:19.880753+00:00 [queued]> dependency 'Previous Dagrun State' PASSED: True, The task did not have depends_on_past set.
+[2022-08-31T17:29:30.242-0400] {taskinstance.py:1181} DEBUG - <TaskInstance: test_etl.hit_wikipedia_api manual__2022-08-31T21:29:19.880753+00:00 [queued]> dependency 'Pool Slots Available' PASSED: True, There are enough open slots in default_pool to execute the task
+[2022-08-31T17:29:30.244-0400] {taskinstance.py:1181} DEBUG - <TaskInstance: test_etl.hit_wikipedia_api manual__2022-08-31T21:29:19.880753+00:00 [queued]> dependency 'Trigger Rule' PASSED: True, The task instance did not have any upstream tasks.
+[2022-08-31T17:29:30.244-0400] {taskinstance.py:1181} DEBUG - <TaskInstance: test_etl.hit_wikipedia_api manual__2022-08-31T21:29:19.880753+00:00 [queued]> dependency 'Not In Retry Period' PASSED: True, The task instance was not marked for retrying.
+[2022-08-31T17:29:30.247-0400] {taskinstance.py:1171} INFO - Dependencies all met for <TaskInstance: test_etl.hit_wikipedia_api manual__2022-08-31T21:29:19.880753+00:00 [queued]>
+[2022-08-31T17:29:30.247-0400] {taskinstance.py:1368} INFO - 
+--------------------------------------------------------------------------------
+[2022-08-31T17:29:30.247-0400] {taskinstance.py:1369} INFO - Starting attempt 1 of 1
+[2022-08-31T17:29:30.248-0400] {taskinstance.py:1370} INFO - 
+--------------------------------------------------------------------------------
+[2022-08-31T17:29:30.267-0400] {taskinstance.py:1389} INFO - Executing <Task(_PythonDecoratedOperator): hit_wikipedia_api> on 2022-08-31 21:29:19.880753+00:00
+[2022-08-31T17:29:30.278-0400] {standard_task_runner.py:79} INFO - Running: ['airflow', 'tasks', 'run', 'test_etl', 'hit_wikipedia_api', 'manual__2022-08-31T21:29:19.880753+00:00', '--job-id', '23', '--raw', '--subdir', 'DAGS_FOLDER/test_dag.py', '--cfg-path', '/var/folders/2z/f_7z97sn6_33j1hnl38wlzs40000gn/T/tmpn91kbbhp', '--error-file', '/var/folders/2z/f_7z97sn6_33j1hnl38wlzs40000gn/T/tmpw37rax2x']
+[2022-08-31T17:29:30.281-0400] {standard_task_runner.py:80} INFO - Job 23: Subtask hit_wikipedia_api
+[2022-08-31T17:29:30.285-0400] {cli_action_loggers.py:66} DEBUG - Calling callbacks: [<function default_action_log at 0x7f8f2bb393a0>]
+[2022-08-31T17:29:30.301-0400] {settings.py:398} DEBUG - Disposing DB connection pool (PID 11261)
+[2022-08-31T17:29:30.305-0400] {settings.py:260} DEBUG - Setting up DB connection pool (PID 11261)
+[2022-08-31T17:29:30.305-0400] {settings.py:330} DEBUG - settings.prepare_engine_args(): Using NullPool
+[2022-08-31T17:29:30.350-0400] {taskinstance.py:1107} DEBUG - previous_execution_date was called
+[2022-08-31T17:29:30.359-0400] {task_command.py:371} INFO - Running <TaskInstance: test_etl.hit_wikipedia_api manual__2022-08-31T21:29:19.880753+00:00 [running]> on host FAS-EALC-LIU-2
+[2022-08-31T17:29:30.361-0400] {taskinstance.py:871} DEBUG - Refreshing TaskInstance <TaskInstance: test_etl.hit_wikipedia_api manual__2022-08-31T21:29:19.880753+00:00 [running]> from DB
+[2022-08-31T17:29:30.395-0400] {standard_task_runner.py:52} INFO - Started process 11261 to run task
+[2022-08-31T17:29:30.431-0400] {taskinstance.py:1107} DEBUG - previous_execution_date was called
+[2022-08-31T17:29:30.463-0400] {taskinstance.py:943} DEBUG - Clearing XCom data
+[2022-08-31T17:29:30.547-0400] {taskinstance.py:1581} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=airflow
+AIRFLOW_CTX_DAG_ID=test_etl
+AIRFLOW_CTX_TASK_ID=hit_wikipedia_api
+AIRFLOW_CTX_EXECUTION_DATE=2022-08-31T21:29:19.880753+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2022-08-31T21:29:19.880753+00:00
+[2022-08-31T17:29:30.548-0400] {__init__.py:146} DEBUG - Preparing lineage inlets and outlets
+[2022-08-31T17:29:30.549-0400] {__init__.py:190} DEBUG - inlets: [], outlets: []
+[2022-08-31T17:29:30.670-0400] {__init__.py:572} INFO - Request URL: https://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles=T. Rowe Price&explaintext=1&exsectionformat=wiki
+[2022-08-31T17:29:30.850-0400] {local_task_job.py:156} INFO - Task exited with return code Negsignal.SIGSEGV
+[2022-08-31T17:29:30.852-0400] {taskinstance.py:871} DEBUG - Refreshing TaskInstance <TaskInstance: test_etl.hit_wikipedia_api manual__2022-08-31T21:29:19.880753+00:00 [running]> from DB
+[2022-08-31T17:29:30.865-0400] {taskinstance.py:871} DEBUG - Refreshing TaskInstance <TaskInstance: test_etl.hit_wikipedia_api manual__2022-08-31T21:29:19.880753+00:00 [running]> from DB
+[2022-08-31T17:29:30.869-0400] {taskinstance.py:2349} DEBUG - Task Duration set to 0.632551
+[2022-08-31T17:29:30.870-0400] {taskinstance.py:1418} DEBUG - Clearing next_method and next_kwargs.
+[2022-08-31T17:29:30.870-0400] {taskinstance.py:1407} INFO - Marking task as FAILED. dag_id=test_etl, task_id=hit_wikipedia_api, execution_date=20220831T212919, start_date=20220831T212930, end_date=20220831T212930
+[2022-08-31T17:29:30.889-0400] {dagrun.py:642} DEBUG - number of tis tasks for <DagRun test_etl @ 2022-08-31 21:29:19.880753+00:00: manual__2022-08-31T21:29:19.880753+00:00, state:running, queued_at: 2022-08-31 21:29:19.895047+00:00. externally triggered: True>: 0 task(s)
+[2022-08-31T17:29:30.891-0400] {local_task_job.py:279} INFO - 0 downstream tasks scheduled from follow-on schedule check
