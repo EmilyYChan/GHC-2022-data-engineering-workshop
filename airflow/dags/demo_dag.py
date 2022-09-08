@@ -10,8 +10,6 @@ import pandas as pd
 from pandas_profiling import ProfileReport
 from airflow.decorators import dag, task
 
-ALTERNATE_CURATION = False
-
 
 def scrape(url: str) -> str:
     try:
@@ -36,7 +34,7 @@ def save_to_db(table: str, values: list):
     conn = sqlite3.connect("company_report.db")
 
     value_bindings = ", ".join(["?"] * len(values))
-    insert_statement = f"INSERT INTO {table} VALUES ({value_bindings});"
+    insert_statement = f"INSERT OR IGNORE INTO {table} VALUES ({value_bindings});"
 
     try:
         conn.cursor().execute(insert_statement, values)
@@ -92,7 +90,7 @@ def demo_pipeline():
     def hit_wikipedia_api(company_name: str, execution_date: datetime = None):
         """
         #### Hit Wikipedia API
-        Get the Wikipedia page for a given company and save the page to the local directory
+        Get the Wikipedia page for a given company and save the page to the local directory as an object
         """
         wiki_page = Wikipedia("en").page(company_name)
         dump(wiki_page, open(f"files/wikipedia/{execution_date}.obj", "wb"))
@@ -120,32 +118,31 @@ def demo_pipeline():
             },
         )
 
-        save_to_db("ticker_price", [execution_date, market_price])
+        save_to_db("stock_price", [market_price, execution_date])
 
-        if ALTERNATE_CURATION:
-            # a high volume ratio can indicate euphoria or fear while the opposite can mean apathy or disinterest
-            volume = get_text(
-                html,
-                tag="fin-streamer",
-                attributes={
-                    "data-symbol": company_ticker,
-                    "data-field": "regularMarketVolume",
-                },
-            )
-            avg_volume = get_text(
-                html, tag="td", attributes={"data-test": "AVERAGE_VOLUME_3MONTH-value"}
-            )
+        # alternate curation
+        # a high volume ratio can indicate euphoria or fear while the opposite can mean apathy or disinterest
+        volume = get_text(
+            html,
+            tag="fin-streamer",
+            attributes={
+                "data-symbol": company_ticker,
+                "data-field": "regularMarketVolume",
+            },
+        )
+        avg_volume = get_text(
+            html, tag="td", attributes={"data-test": "AVERAGE_VOLUME_3MONTH-value"}
+        )
 
-            save_to_db("volume", [execution_date, volume, avg_volume])
+        save_to_db("volume", [volume, avg_volume, execution_date])
 
-            # esg score
-            ESG_score_component = html.find(
-                name="div", attrs={"data-yaft-module": "tdv2-applet-miniESGScore"}
-            )
-            text = ESG_score_component.find_all(string=re.compile(r".*"))
-            save_to_db("esg_risk_score", [execution_date] + text[1:])
+        # esg score
+        ESG_score_component = html.find(
+            name="div", attrs={"data-yaft-module": "tdv2-applet-miniESGScore"}
+        )
+        text = ESG_score_component.find_all(string=re.compile(r".*"))
+        save_to_db("esg", text[1:] + [execution_date]) # process to float
 
-        return market_price
 
     @task()
     def curate_bing_news(execution_date: datetime = None):
@@ -168,11 +165,9 @@ def demo_pipeline():
 
         parsed_articles = list(map(extract_article_info, bing_news_article_cards))
 
-        # demonstrate upsert -> "ON CONFLICT(headline) DO ..."
         for headline, blurb, link in parsed_articles:
-            save_to_db("news_articles", (headline, blurb, link))
+            save_to_db("news", (headline, blurb, link, execution_date))
 
-        return parsed_articles
 
     @task()
     def curate_wikipedia(execution_date: datetime = None):
@@ -181,7 +176,7 @@ def demo_pipeline():
         Save Wikipedia page to database in table "wikipedia"
         """
         wiki_page = load(open(f"files/wikipedia/{execution_date}.obj", "rb"))
-        section_titles = [section.title for section in wiki_page.sections]
+        section_titles = json.dumps([section.title for section in wiki_page.sections])
         save_to_db(
             "wikipedia",
             [
@@ -189,8 +184,8 @@ def demo_pipeline():
                 wiki_page.fullurl,
                 wiki_page.summary,
                 section_titles,
-                wiki_page.sections,
                 wiki_page.text,
+                execution_date,
             ],
         )
 
@@ -204,7 +199,7 @@ def demo_pipeline():
     def profile_data():
         # https://medium.com/analytics-vidhya/pandas-profiling-5ecd0b977ecd
         conn = sqlite3.connect("company_report.db")
-        df = pd.read_sql_query("SELECT * FROM news_articles", conn)
+        df = pd.read_sql_query("SELECT * FROM news", conn)
         profile = ProfileReport(df, title="News Articles Data Profile", minimal=True)
         profile.to_file("news_articles_data_profile.html")
 
