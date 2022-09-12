@@ -2,6 +2,7 @@ import pendulum
 from datetime import datetime
 import re
 import requests
+import json
 import sqlite3
 from pickle import load, dump
 from bs4 import BeautifulSoup
@@ -9,6 +10,8 @@ from wikipediaapi import Wikipedia
 import pandas as pd
 from pandas_profiling import ProfileReport
 from airflow.decorators import dag, task
+from great_expectations_provider.operators.great_expectations import GreatExpectationsOperator
+
 
 
 def scrape(url: str) -> str:
@@ -137,11 +140,13 @@ def demo_pipeline():
         save_to_db("volume", [volume, avg_volume, execution_date])
 
         # esg score
-        ESG_score_component = html.find(
+        ESG_html = html.find(
             name="div", attrs={"data-yaft-module": "tdv2-applet-miniESGScore"}
         )
-        text = ESG_score_component.find_all(string=re.compile(r".*"))
-        save_to_db("esg", text[1:] + [execution_date]) # process to float
+        _, risk_score, risk_level, percentile = ESG_html.find_all(string=re.compile(r".*"))
+        risk_score = float(risk_score)
+        percentile = int(re.sub("\D","", percentile))
+        save_to_db("esg", [risk_score, risk_level, percentile, execution_date])
 
 
     @task()
@@ -196,14 +201,29 @@ def demo_pipeline():
     # [START Data Quality Monitoring Steps]
 
     @task()
-    def profile_data():
+    def profile_data(company_name: str):
         # https://medium.com/analytics-vidhya/pandas-profiling-5ecd0b977ecd
         conn = sqlite3.connect("company_report.db")
-        df = pd.read_sql_query("SELECT * FROM news", conn)
-        profile = ProfileReport(df, title="News Articles Data Profile", minimal=True)
-        profile.to_file("news_articles_data_profile.html")
+        query = """
+                SELECT * FROM news
+                JOIN stock_price ON news.scrape_date = stock_price.scrape_date
+                JOIN volume ON stock_price.scrape_date = volume.scrape_date
+                JOIN esg ON volume.scrape_date = esg.scrape_date
+                JOIN wikipedia ON esg.scrape_date = wikipedia.scrape_date
+                """
+        combined_data = pd.read_sql_query(query, conn)
+        combined_data
 
-    # TODO: great expectations
+        profile = ProfileReport(combined_data, title=f"{company_name} Data Profile", minimal=True, infer_dtypes=False)
+        profile.to_file(f"{company_name}_data_profile.html")
+
+
+    data_quality_tests = GreatExpectationsOperator(
+        task_id="test_data_quality",
+        data_context_root_dir="/Users/trpij38/Documents/GHC-talk/great_expectations",
+        checkpoint_name="checkpoint",
+        fail_task_on_validation_failure=True,
+    )
 
     # [END Data Quality Monitoring Steps]
 
@@ -229,7 +249,7 @@ def demo_pipeline():
         scrape_yahoo_finance(company_ticker) >> curate_yahoo_finance(),
         scrape_bing_news(company_name) >> curate_bing_news(),
         hit_wikipedia_api(company_name) >> curate_wikipedia()
-    ] >> profile_data() >> generate_report()
+    ] >> profile_data(company_name) >> data_quality_tests >> generate_report()
 
 
 # invoke DAG
