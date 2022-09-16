@@ -1,4 +1,4 @@
-# GHC 2022: Demystifying Data Engineering
+# GHC 2022 9/23: Demystifying Data Engineering
 
 ## Goals
 The goal of this workshop is to demystify data engineering and demonstrate some of the important concepts and principles of data engineering via a toy data pipeline.
@@ -28,3 +28,16 @@ Turn the Dag on
 
 
 ## Principles
+
+
+## Resources / Documentation
+Airflow Local Setup: https://airflow.apache.org/docs/apache-airflow/stable/start/local.html
+Airflow DAGs: https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html
+Airflow Architecture: https://airflow.apache.org/docs/apache-airflow/stable/concepts/overview.html
+
+Streamlit Setup: https://docs.streamlit.io/library/get-started/installation
+Streamlit Usage Guide: https://docs.streamlit.io/library/get-started/main-concepts
+
+## Troubleshooting
+export AIRFLOW_HOME
+change all paths 
