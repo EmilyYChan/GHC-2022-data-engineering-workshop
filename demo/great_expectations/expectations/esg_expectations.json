@@ -1,6 +1,6 @@
 {
   "data_asset_type": null,
-  "expectation_suite_name": "esg_data_expectations",
+  "expectation_suite_name": "esg_expectations",
   "expectations": [
     {
       "expectation_type": "expect_column_value_lengths_to_be_between",
