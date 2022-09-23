@@ -22,12 +22,12 @@ def get_all_data_from_table(table: str) -> pd.DataFrame:
 
 def get_wikipedia_summary_from_db() -> str:
     query = "SELECT summary FROM wikipedia WHERE scrape_date=(SELECT max(scrape_date) FROM wikipedia);"
-    return get_from_db(query).at[0, 'summary']
+    return get_from_db(query).at[0, "summary"]
 
 
 def get_wikipedia_url_from_db() -> str:
     query = "SELECT url FROM wikipedia WHERE scrape_date=(SELECT max(scrape_date) FROM wikipedia);"
-    return get_from_db(query).at[0, 'url']
+    return get_from_db(query).at[0, "url"]
 
 
 def get_esg_info_from_db() -> Tuple[float, str, int]:
@@ -64,16 +64,15 @@ def generate_news_html() -> str:
     news_df = get_all_data_from_table("news")
     for index, headline, blurb, link, _ in news_df.itertuples(name=None):
         styling += generate_news_card(headline, blurb, link, index)
-    return styling 
+    return styling
 
 
-
-st.set_page_config(layout='wide')
+st.set_page_config(layout="wide")
 
 
 # Header
 logo, name = st.columns([1, 10])
-logo.image('./demo/files/trp_logo.png', width=85)
+logo.image("./demo/files/trp_logo.png", width=85)
 name.title("T. Rowe Price")
 
 # split out news column
@@ -81,49 +80,55 @@ main, news = st.columns([1.75, 1], gap="large")
 
 # news
 with news:
-  components.html(generate_news_html(), height=500, scrolling=True)
+    components.html(generate_news_html(), height=500, scrolling=True)
 
 # Description
 main.markdown(get_wikipedia_summary_from_db().replace("$", "\$"))
 main.markdown("Further reading: " + get_wikipedia_url_from_db())
 
 # ESG section
-for score, risk_level, percentile, scrape_date in get_esg_info_from_db().itertuples(name=None, index=False):
-    main.subheader(f'ESG Risk Score: {score}')
+for score, risk_level, percentile, scrape_date in get_esg_info_from_db().itertuples(
+    name=None, index=False
+):
+    main.subheader(f"ESG Risk Score: {score}")
 
-    fig = plt.figure(figsize=(8, .5))
+    fig = plt.figure(figsize=(8, 0.5))
     ax = fig.add_subplot()
-    ax.set_xlim(0,100)
-    ax.set_ylim(0,1)
+    ax.set_xlim(0, 100)
+    ax.set_ylim(0, 1)
 
     # remove everything except x-axis
     ax.yaxis.set_major_locator(ticker.NullLocator())
-    ax.spines.right.set_color('none')
-    ax.spines.left.set_color('none')
-    ax.spines.top.set_color('none')
+    ax.spines.right.set_color("none")
+    ax.spines.left.set_color("none")
+    ax.spines.top.set_color("none")
 
     # define tick positions
     ax.xaxis.set_major_locator(ticker.MultipleLocator(5.00))
     ax.xaxis.set_minor_locator(ticker.MultipleLocator(1.00))
-    ax.xaxis.set_ticks_position('bottom')
-    ax.tick_params(which='major', width=1.00, length=5, labelsize=7)
-    ax.tick_params(which='minor', width=0.75, length=2.5)
+    ax.xaxis.set_ticks_position("bottom")
+    ax.tick_params(which="major", width=1.00, length=5, labelsize=7)
+    ax.tick_params(which="minor", width=0.75, length=2.5)
 
-    plt.annotate(f'Risk: {risk_level} \n Percentile: {percentile}', (score,0), xytext=(score, 1), horizontalalignment='center')
-    plt.scatter(x=score, y=0, c='red')
+    plt.annotate(
+        f"Risk: {risk_level} \n Percentile: {percentile}",
+        (score, 0),
+        xytext=(score, 1),
+        horizontalalignment="center",
+    )
+    plt.scatter(x=score, y=0, c="red")
     main.pyplot(fig=fig)
 
 # stock price
 prices_df = get_all_data_from_table("stock_price")
-first_price=float(prices_df.iloc[0]["price"])
-last_price=float(prices_df.iloc[-1]["price"])
-percent_change = round((last_price-first_price)/first_price * 100, 3)
+first_price = float(prices_df.iloc[0]["price"])
+last_price = float(prices_df.iloc[-1]["price"])
+percent_change = round((last_price - first_price) / first_price * 100, 3)
 
-st.subheader(f'Stock Price: {percent_change}%')
+st.subheader(f"Stock Price: {percent_change}%")
 
-prices_df['scrape_date'] = pd.to_datetime(prices_df['scrape_date'])
+prices_df["scrape_date"] = pd.to_datetime(prices_df["scrape_date"])
 
-col1, col2 = st.columns([2, 1,], gap="large")
+col1, col2 = st.columns([2,1], gap="large")
 col1.line_chart(prices_df, y="price", x="scrape_date")
 col2.write(prices_df)
-
