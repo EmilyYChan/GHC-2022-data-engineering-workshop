@@ -3,14 +3,23 @@ from datetime import datetime
 from typing import Tuple, List
 from pickle import load, dump
 import pandas as pd
-# from pandas_profiling import ProfileReport
 from airflow.decorators import dag, task
 
 
+"""
+This file defines the DAG for our pipeline (directed acyclic graph, which is the 
+dependency graph indicating which tasks need to be executed successfully before 
+others begin). The function below, `demo_pipeline`, is marked by the @dag decorator,
+which means it contains the structure and configuration of the DAG. Within the @dag
+decorator, we've set this DAG to run on a schedule of "*/2 * * * *", which is every 
+2 minutes. The `demo_pipeline` function also contains the functions that define 
+each task and what it does. We've grouped our tasks into ingestion, cleaning, 
+data quality monitoring, and curation. 
+"""
 
 
 @dag(
-    schedule_interval='*/2 * * * *',  # run every 2 min
+    schedule_interval="*/2 * * * *",  
     start_date=pendulum.datetime(2022, 1, 1, tz="UTC"),
     catchup=False,
 )
@@ -18,13 +27,23 @@ def demo_pipeline():
     """
     ### GHC 2022 Data Engineering Workshop Demo Pipeline
     This is a simple ETL data pipeline which demonstrates ingesting data from
-    different sources, monitoring data quality, and generating a report.
+    different sources and monitoring data quality.
     """
 
     # [START Ingestion Tasks]
+    """
+    These are our data ingestion tasks, which retrieve data from Yahoo Finance, 
+    Bing News, and Wikipedia and save the unstructured data to our local directory 
+    demo/files. Within the @task decorator, we've configured the task to retry up to
+    three times if it fails, and have an exponentially increasing delay between each 
+    attempt. This accounts for errors caused by a site being down or an API being 
+    temporarily inaccessible. 
+    """
 
     @task(retries=3, retry_exponential_backoff=True)
-    def get_data_from_yahoo_finance(company_ticker: str, execution_date: datetime = None):
+    def get_data_from_yahoo_finance(
+        company_ticker: str, execution_date: datetime = None
+    ):
         # scrape the company's yahoo finance page
         yahoo_finance_html = scrape(
             url=f"https://finance.yahoo.com/quote/{company_ticker}"
@@ -33,7 +52,6 @@ def demo_pipeline():
         # save yahoo finance page to local directory as html
         with open(f"demo/files/yahoo_finance/{execution_date}.html", "w") as file:
             file.write(yahoo_finance_html)
-
 
     @task(retries=3, retry_exponential_backoff=True)
     def get_data_from_bing_news(company_name: str, execution_date: datetime = None):
@@ -46,7 +64,6 @@ def demo_pipeline():
         # save search results page to local directory as html
         with open(f"demo/files/bing_news/{execution_date}.html", "w") as file:
             file.write(bing_news_html)
-
 
     @task(retries=3, retry_exponential_backoff=True)
     def get_data_from_wikipedia(company_name: str, execution_date: datetime = None):
@@ -61,12 +78,22 @@ def demo_pipeline():
     # [END Ingestion Tasks]
 
     # [START Cleaning Tasks]
+    """
+    These tasks clean the data from each source, which means pulling out the 
+    information we're actually interested from the unstructured objects that we 
+    retieved in the ingestion step, and saving that information to our company_info 
+    database.
+    """
 
     @task()
     def clean_yahoo_finance_data(company_ticker: str, execution_date: datetime = None):
-        yahoo_finance_html = open(f"demo/files/yahoo_finance/{execution_date}.html", "r").read()
+        yahoo_finance_html = open(
+            f"demo/files/yahoo_finance/{execution_date}.html", "r"
+        ).read()
 
-        market_price = get_yahoo_finance_market_price(yahoo_finance_html, company_ticker)
+        market_price = get_yahoo_finance_market_price(
+            yahoo_finance_html, company_ticker
+        )
         save_to_db(table="stock_price", values=[market_price, execution_date])
 
         volume = get_yahoo_finance_volume(yahoo_finance_html, company_ticker)
@@ -75,7 +102,6 @@ def demo_pipeline():
 
         esg_info = get_yahoo_finance_esg_info(yahoo_finance_html)
         save_to_db(table="esg", values=(*esg_info, execution_date))
-
 
     @task()
     def clean_bing_news_data(execution_date: datetime = None):
@@ -86,7 +112,6 @@ def demo_pipeline():
 
         for headline, blurb, link in parsed_articles:
             save_to_db(table="news", values=(headline, blurb, link, execution_date))
-
 
     @task()
     def clean_wikipedia_data(execution_date: datetime = None):
@@ -105,6 +130,13 @@ def demo_pipeline():
     # [END Cleaning Tasks]
 
     # [START Data Quality Monitoring Tasks]
+    """
+    These tasks monitor the data quality of the cleaned data from each source, 
+    which means running a series of data quality tests that we defined in 
+    demo/great_expectations/expectations. These tests are chosen manually based on
+    domain knowledge of the data, and if any of the tests fail, the task will fail
+    and prevent the rest of the pipeline from proceeding.
+    """
 
     @task()
     def test_yahoo_finance_data():
@@ -112,40 +144,65 @@ def demo_pipeline():
 
     @task()
     def test_bing_news_data():
+        pass
         run_data_quality_tests("bing_news")
 
     @task()
     def test_wikipedia_data():
+        pass
         run_data_quality_tests("bing_news")
 
     @task()
     def test_curated_data():
+        pass
         run_data_quality_tests("all_curated_data")
 
     # [END Data Quality Monitoring Tasks]
 
     # [START Curation Task]
+    """
+    This task currently does nothing, but exists to represent the last stage that we
+    would normally have in a pipeline. The purpose of the data engineering work we do 
+    is to create a data product that caters to the needs of our end users, so normally
+    we might bring together all of our different datasets into one dataset consumable 
+    by a single reporting tool. This isn't necessary in a small toy pipeline like this, 
+    but an example of what this could look like is mapping all the data we've collected 
+    to an internal company identifier.
+    """
 
     @task()
     def curate_data():
-        # calculate percent change for price over the day
         pass
-
 
     # [END Curation Task]
 
     company_ticker = "TROW"
     company_name = "T. Rowe Price"
 
-    [
-        get_data_from_yahoo_finance(company_ticker) >> clean_yahoo_finance_data(company_ticker) >> test_yahoo_finance_data(),
-        get_data_from_bing_news(company_name) >> clean_bing_news_data() >> test_bing_news_data(),
-        get_data_from_wikipedia(company_name) >> clean_wikipedia_data() >> test_wikipedia_data(),
-    ] >> curate_data() >> test_curated_data()
+    """
+    This is where we define the relationships between the different tasks. 
+    `task1 >> task2` means that task1 must complete successfully before task2 can 
+    begin. This is the only part of this file that is not regular Python syntax -- 
+    Airflow knows how to parse these bitshift operators to create the dependency graph.
+    """
+    (
+        [
+            get_data_from_yahoo_finance(company_ticker) >> clean_yahoo_finance_data(company_ticker) >> test_yahoo_finance_data(),
+            get_data_from_bing_news(company_name) >> clean_bing_news_data() >> test_bing_news_data(),
+            get_data_from_wikipedia(company_name) >> clean_wikipedia_data() >> test_wikipedia_data(),
+        ]
+        >> curate_data() >> test_curated_data()
+    )
 
 
 
-def parse_bing_news_articles(html: str) -> List[Tuple[str, str, str]]: 
+"""
+The following are helper functions, which contain low-level implementation details 
+that aren't critical to understanding the structure and function of the Airflow DAG.
+"""
+
+
+def parse_bing_news_articles(html: str) -> List[Tuple[str, str, str]]:
     from bs4 import BeautifulSoup
 
     html_parser = BeautifulSoup(html, "html.parser")
@@ -169,27 +226,31 @@ def get_yahoo_finance_market_price(html: str, company_ticker: str) -> float:
 
     html_parser = BeautifulSoup(html, "html.parser")
     return float(
-            html_parser.find(
+        html_parser.find(
             "fin-streamer",
             attrs={
                 "data-symbol": company_ticker,
                 "data-field": "regularMarketPrice",
-            }).text
-        )
+            },
+        ).text
+    )
 
 
-def get_yahoo_finance_volume(html: str, company_ticker: str) -> int:  # TODO: do we need company ticker?
+def get_yahoo_finance_volume(
+    html: str, company_ticker: str
+) -> int:  # TODO: do we need company ticker?
     from bs4 import BeautifulSoup
 
     html_parser = BeautifulSoup(html, "html.parser")
     return int(
-            html_parser.find(
+        html_parser.find(
             "fin-streamer",
             attrs={
                 "data-symbol": company_ticker,
                 "data-field": "regularMarketVolume",
             },
-        ).text.replace(',', ''))
+        ).text.replace(",", "")
+    )
 
 
 def get_yahoo_finance_avg_volume(html: str) -> int:
@@ -197,8 +258,10 @@ def get_yahoo_finance_avg_volume(html: str) -> int:
 
     html_parser = BeautifulSoup(html, "html.parser")
     return int(
-            html_parser.find("td", attrs={"data-test": "AVERAGE_VOLUME_3MONTH-value"}
-        ).text.replace(',', ''))
+        html_parser.find(
+            "td", attrs={"data-test": "AVERAGE_VOLUME_3MONTH-value"}
+        ).text.replace(",", "")
+    )
 
 
 def get_yahoo_finance_esg_info(html: str) -> Tuple[float, str, int]:
@@ -207,17 +270,17 @@ def get_yahoo_finance_esg_info(html: str) -> Tuple[float, str, int]:
 
     html_parser = BeautifulSoup(html, "html.parser")
     ESG_html = html_parser.find(
-                name="div", attrs={"data-yaft-module": "tdv2-applet-miniESGScore"}
-            )
+        name="div", attrs={"data-yaft-module": "tdv2-applet-miniESGScore"}
+    )
     _, risk_score, risk_level, percentile = ESG_html.find_all(string=re.compile(r".*"))
     risk_score = float(risk_score)
-    percentile = int(re.sub("\D","", percentile))
+    percentile = int(re.sub("\D", "", percentile))
     return risk_score, risk_level, percentile
 
 
 def scrape(url: str) -> str:
     import requests
-    
+
     try:
         page = requests.get(url)
         print(f"Response recieved from {url} with status code: {page.status_code}")
@@ -245,40 +308,14 @@ def save_to_db(table: str, values: list):
     conn.close()
 
 
-def get_from_db(query: str) -> pd.DataFrame:
-    import sqlite3
-
-    conn = sqlite3.connect("demo/company_info.db")
-    result = pd.read_sql_query(query, conn)
-    conn.close()
-    return result
-
-
 def run_data_quality_tests(test_suite: str):
     from great_expectations import DataContext
 
-    data_context = DataContext("/Users/trpij38/Documents/GHC-talk/demo/great_expectations")
-    data_context.run_checkpoint(checkpoint_name=test_suite)
+    data_context = DataContext(
+        "/Users/trpij38/Documents/GHC-talk/demo/great_expectations"
+    )
+    data_context.run_checkpoint(checkpoint_name=test_suite+"_checkpoint")
     print(data_context.build_data_docs())
-
-# def plot_timestamps(data):
-#     valid_times = get_timestamps(get_valid_pages(data))
-#     invalid_times = get_timestamps(get_invalid_pages(data))
-#     date = min(valid_times) if valid_times else min(invalid_times)
-    
-#     f = plt.figure()
-#     f.set_figwidth(15)
-#     f.set_figheight(10)
-
-#     if valid_times:
-#         plt.hist(valid_times, bins=20, alpha=0.5, color="skyblue", label='Valid Pages')
-#     if invalid_times:
-#         plt.hist(invalid_times, bins=20, alpha=0.5, color="orange", label='Cloudflare Protected Pages')
-#     plt.legend(loc='upper right')
-#     plt.xlabel("Timestamp (Date and Hour)")
-#     plt.ylabel("Number of Scraped Pages")
-#     plt.title(f"Valid vs Invalid Pages Over Time for {date.month}/{date.day} (based on last modifed timestamp in AWS S3)")
-#     plt.show()
 
 
 # invoke DAG
