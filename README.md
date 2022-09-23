@@ -26,7 +26,7 @@ The configuration file `demo/airflow/airflow.cfg` contains a number of paths tha
 `python3 -m venv ghc-venv` will create a new virtual environment called `ghc-venv`, and a new directory of the same name where libraries will be installed. We can then activate this virtual environment using `source ghc-venv/bin/activate`.
 4. **Install requirements**  \
 `pip install -r demo/requirements.txt`
-5. **Set environment variables**:  \
+5. **Set environment variables**  \
 `export AIRFLOW_HOME=<path_to_your_cloned_repo>/demo/airflow`
 6. **Spin up Airflow**  \
 `airflow standalone`
