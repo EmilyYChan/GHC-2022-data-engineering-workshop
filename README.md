@@ -39,7 +39,7 @@ Running `streamlit run demo/company_report.py` will automatically open the appli
 
 ## Concepts
 - **Unstructured Storage**: \
-Unstructured storage can contain any kind of object or data, and so is a great place for us to dump raw data that hasn't been processed yet. In our production stack, this would be a storage solution like AWS S3. For this demo pipeline, we will use the local directory `demo/files/` as our unstructured storage, and that's where we'll store our scraped html files.
+Unstructured storage can contain any kind of object or data, and so is a great place for us to dump raw data that hasn't been processed yet. In our production stack, this would be a storage solution like AWS S3. For this demo pipeline, we will use the local directory `demo/files/` as our unstructured storage.
 - **Structured Storage**:  \
 Structured storage, otherwise known as a database, has rows and columsn, and requires its data to fit a particular format. Since retrieval is fast and the organization of the data is well-defined, this is where we'll store the cleaned and processed data for our application to access. Normally we would use a cloud data warehouse like Snowflake, but in this pipeline, our structured storage will be the SQLite database contained in `demo/company_info.db`.
 - **Orchestration**:  \
