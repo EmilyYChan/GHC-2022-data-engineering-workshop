@@ -20,8 +20,8 @@ replicable, this demo is set up to run locally.
 
 ## Setup
 1. **Clone the repo**
-2. **Change Airflow configuration paths**  \
-The configuration file `demo/airflow/airflow.cfg` contains a number of paths that tell Airflow where to access certain resources. Change any paths that begin with `/Users/trpij38/Documents/GHC-talk` to include the path of your own cloned repo directory, which you can find by typing `pwd` into your terminal.
+2. **Change configuration paths**  \
+The configuration file `demo/airflow/airflow.cfg` contains a number of paths that tell Airflow where to access certain resources. Change any paths that contain `/Users/trpij38/Documents/GHC-talk` to include the path of your own cloned repo directory instead, which you can find by typing `pwd` into your terminal. `demo/airflow/dags/demo_dags.py` and `demo/great_expectations/great_expectations.yml` also contain paths that need changing. (Tip: you can find all paths that need to be changed with `git grep -rn "/Users/trpij38/Documents/GHC-talk"`)
 3. **Create and activate a virtual environment**  \
 `python3 -m venv ghc-venv` will create a new virtual environment called `ghc-venv`, and a new directory of the same name where libraries will be installed. We can then activate this virtual environment using `source ghc-venv/bin/activate`.
 4. **Install requirements**  \
