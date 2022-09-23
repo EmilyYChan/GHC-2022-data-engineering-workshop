@@ -23,7 +23,7 @@ replicable, this demo is set up to run locally.
 2. **Change Airflow configuration paths**  \
 The configuration file `demo/airflow/airflow.cfg` contains a number of paths that tell Airflow where to access certain resources. Change any paths that begin with `/Users/trpij38/Documents/GHC-talk` to include the path of your own cloned repo directory, which you can find by typing `pwd` into your terminal.
 3. **Create and activate a virtual environment**  \
-`python3 -m venv ghc-venv` will create a new virtual environment called `ghc-venv`, and new directory of the same name where libraries will be installed. We can then activate this virtual environment using `source ghc-venv/bin/activate`.
+`python3 -m venv ghc-venv` will create a new virtual environment called `ghc-venv`, and a new directory of the same name where libraries will be installed. We can then activate this virtual environment using `source ghc-venv/bin/activate`.
 4. **Install requirements**  \
 `pip install -r demo/requirements.txt`
 5. **Set environment variables**:  \
